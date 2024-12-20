@@ -1,15 +1,17 @@
 "use client"
 
-import React,{useState} from 'react'
+import React,{useState , useRef} from 'react'
 import ProjectCard from './ProjectCard'
 import ProjectTag from './ProjectTag'
+import {motion , useInView} from "framer-motion"
+
 
 const projectsData = [
     {
         id:1,
-        title:"Transcriber and Translator",
-        description:"React Transcriber and Translator using Machine Learning",
-        image:"/images/projects/voice1.png",
+        title:"Kochi Water Metro , PCS",
+        description:"Passenger Counting system",
+        image:"/images/projects/water_metro_1.png",
         tag:["All","Frontend"],
         gitUrl:"/",
         previewUrl:"/"
@@ -17,8 +19,8 @@ const projectsData = [
     {
         id:2,
         title:"AI Image Generator",
-        description:"React AI image generator using DALL-E ",
-        image:"/images/projects/voice2.png",
+        description:"React AI image generator using openai's DALL-E ",
+        image:"/images/projects/image_gen.png",
         tag:["All","Frontend"],
         gitUrl:"/",
         previewUrl:"/"
@@ -27,15 +29,15 @@ const projectsData = [
         id:3,
         title:"Real-time Chat App",
         description:"Real time chat  app using React, Node, ChatEngine.io and Firebase",
-        image:"/images/projects/voice3.png",
+        image:"/images/projects/chat.png",
         tag:["All","Full Stack","Backend"],
-        gitUrl:"/",
+        gitUrl:"https://github.com/MohammedSahilMS/ChatApp_Firebasehttps://github.com/MohammedSahilMS/Mern_chatEngine_chatApp",
         previewUrl:"/"
     },
     {
         id:4,
-        title:"E commerce App",
-        description:"Full stack e commerce app using MERN Stack",
+        title:"Voice Verse",
+        description:"React App which transcribes and translates voice in real time.",
         image:"/images/projects/voice1.png",
         tag:["All","Full Stack","Backend"],
         gitUrl:"/",
@@ -43,7 +45,7 @@ const projectsData = [
     },
     {
         id:5,
-        title:"TODP App",
+        title:"TODO App",
         description:"Todo application using React",
         image:"/images/projects/todoProject.png",
         tag:["All","Frontend"],
@@ -52,9 +54,9 @@ const projectsData = [
     },
     {
         id:6,
-        title:"Blood Donation List",
-        description:"A full stack MERN Application to enter details of people willing to donate blood",
-        image:"/images/projects/voice1.png",
+        title:"Apple Webiste using GSAP",
+        description:"Apple webiste implementing modern animation using GSAP.",
+        image:"/images/projects/apple.png",
         tag:["All","Backend","Full Stack"],
         gitUrl:"/",
         previewUrl:"/"
@@ -63,6 +65,8 @@ const projectsData = [
 
 const ProjectSection = () => {
     const [tag, setTag] = useState("All");
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once : true});
 
     const handleTagChange = (newTag) => {
         setTag(newTag);
@@ -73,9 +77,15 @@ const ProjectSection = () => {
         return project.tag.includes(tag); // Return the result of the filtering operation
     });
 
+    const cardVariants = {
+        initial:{ y:50, opacity:0},
+        animate:{y:0,opacity:1},
+    }
+
     return (
         <>
-<div className='px-2'>
+        <section >
+        <div className='px-2'>
     <h2 className='text-center text-4xl font-bold text-white mb-5'>My Projects</h2>
     <div className='text-white flex flex-col md:flex-row justify-center items-center gap-2 py-6 '>
         <div className="flex flex-wrap justify-center md:justify-start gap-2">
@@ -87,13 +97,18 @@ const ProjectSection = () => {
             <ProjectTag onClick={handleTagChange} name="Backend" isSelected={tag === "Backend"} />
         </div>
     </div>
-    <div className='grid md:grid-cols-3 gap-8 md:gap-12'>
+    <ul ref={ref} className='grid md:grid-cols-3 gap-8 md:gap-12'>
         {/* Render filtered projects */}
-        {filteredProjects.map((project) => (
+        {filteredProjects.map((project , index) => (
+            <motion.li key={index} variants={cardVariants} initial="initial" animate={isInView ? "animate" : "initial"} 
+            transition={{duration: 0.2 , delay: index * 0.4}} >
             <ProjectCard key={project.id} title={project.title} description={project.description} imgUrl={project.image} gitUrl={project.gitUrl} previewUrl={project.previewUrl} />
+            </motion.li>
         ))}
-    </div>
+    </ul>
 </div>
+        </section>
+
             
         </>
     );

@@ -65,7 +65,7 @@ const AboutSection = () => {
         />
         <div className='mt-4 md:mt-0 text-left flex flex-col h-full'>
           <h1 className='text-3xl font-bold text-white mb-4'>About Me</h1>
-          <p className='text-base lg:text-lg'>I am a b.tech Computer Science graduate, actively pursuing advanced coursework in FullStack Development, focusing on honing skills in building scalable and efficient applications using the MERN stack. I maintain a driven mindset to stay at the forefront of industry advancements. I am looking forward to contribute my technical expertise and passion for innovation to a dynamic development team.</p>
+          <p className='text-base lg:text-lg'>I’m a Junior MERN Stack Developer with a strong focus on improving my skills in both backend and frontend development. Through hands-on experience, I’ve gained expertise in building efficient APIs, managing databases, and creating dynamic, user-friendly interfaces. I’m passionate about solving real-world problems with clean and scalable code, constantly learning new technologies to enhance my craft. My journey as a developer is driven by a commitment to delivering impactful and reliable solutions.</p>
           <div className='flex flex-row justify-start mt-8'>
             <TabButton selectTab={() => handleTabChange("skills")} active={tab === "skills"}>Skills</TabButton>
             <TabButton selectTab={() => handleTabChange("certificates and Experience")} active={tab === "certificates and Experience"}>Certificates and Experience</TabButton>
